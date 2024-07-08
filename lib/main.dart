@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/featuers/onboarding/presentation/view/onboarding_screen.dart';
 
 main(){
   runApp(TodoApp());
@@ -10,6 +11,7 @@ class TodoApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      home: OnboardingScreen(),
     );
   }
 }
