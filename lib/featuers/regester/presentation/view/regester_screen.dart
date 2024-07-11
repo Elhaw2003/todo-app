@@ -19,7 +19,6 @@ class RegesterScreen extends StatefulWidget {
 
 class _RegesterScreenState extends State<RegesterScreen> {
   final ImagePicker picker = ImagePicker();
-
     XFile? image;
 
   getPhoto (ImageSource imageSource) async{
@@ -68,7 +67,7 @@ class _RegesterScreenState extends State<RegesterScreen> {
                                   children: [
                                     Icon(
                                         Icons.add_a_photo,
-                                      color: AppColors.blue,
+                                      color: AppColors.mainColor,
                                       size: 30,
                                     ),
                                     SizedBox(height: 15,),
@@ -77,7 +76,7 @@ class _RegesterScreenState extends State<RegesterScreen> {
                                       style: TextStyle(
                                         fontWeight: FontWeight.w600,
                                         fontSize: 15,
-                                        color: AppColors.blue
+                                        color: AppColors.mainColor
                                       ),
                                     )
                                   ],
@@ -99,7 +98,7 @@ class _RegesterScreenState extends State<RegesterScreen> {
                                   children: [
                                     Icon(
                                       Icons.photo,
-                                      color: AppColors.blue,
+                                      color: AppColors.mainColor,
                                       size: 30,
                                     ),
                                     SizedBox(height: 15,),
@@ -108,7 +107,7 @@ class _RegesterScreenState extends State<RegesterScreen> {
                                       style: TextStyle(
                                           fontWeight: FontWeight.w600,
                                           fontSize: 15,
-                                          color: AppColors.blue
+                                          color: AppColors.mainColor
                                       ),
                                     )
                                   ],
@@ -125,12 +124,12 @@ class _RegesterScreenState extends State<RegesterScreen> {
                   width: 120,
                   height: 120,
                   decoration: BoxDecoration(
-                    border: Border.all(color: AppColors.blue),
+                    border: Border.all(color: AppColors.mainColor),
                     borderRadius: BorderRadius.circular(20)
                   ),
                   child: image == null ? Icon(
                   Icons.add_a_photo,
-                  color: AppColors.blue,
+                  color: AppColors.mainColor,
                   size: 40,
                 ): ClipRRect(
                     borderRadius: BorderRadius.circular(20),
@@ -151,7 +150,7 @@ class _RegesterScreenState extends State<RegesterScreen> {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  border: Border.all(color: AppColors.blue)
+                  border: Border.all(color: AppColors.mainColor)
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 7),
@@ -194,13 +193,14 @@ class _RegesterScreenState extends State<RegesterScreen> {
                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (c){
                       return HomeScreen(
                         name: nameControler.text,
+                        photo:File(image!.path),
                       );
                     }));
                   }
                 },
                 child: CustomButton(
                     title: AppTexts.getStarted,
-                    color: AppColors.blue
+                    color: AppColors.mainColor
                 ),
               )
             ],

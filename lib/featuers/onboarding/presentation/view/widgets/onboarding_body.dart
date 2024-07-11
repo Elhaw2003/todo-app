@@ -53,7 +53,7 @@ project-wise conveniently!""",
             padding: const EdgeInsets.symmetric(horizontal: 22),
             child: CustomButton(
                 title: AppTexts.letsStart,
-                color: AppColors.blue,
+                color: AppColors.mainColor,
                 icon: Image.asset(AppImages.arrowleft),
             ),
           ),

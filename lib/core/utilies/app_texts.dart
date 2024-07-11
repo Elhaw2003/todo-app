@@ -7,5 +7,7 @@ class AppTexts {
   static const String getStarted = "Get Started";
   static const String camera = "Camera";
   static const String gallery = "Gallery";
+  static const String hello = "Hello!";
+  static const String done = "Done";
   static const String select_Photo_name = "Select Photo and Enter your Name";
 }
