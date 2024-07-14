@@ -48,9 +48,9 @@ class AppbarHomeScreen extends StatelessWidget {
                 ),
                 trailing: CircleAvatar(
                   backgroundColor: AppColors.white,
-                  radius: 50,
+                  radius: 33,
                   child: CircleAvatar(
-                    radius: 44,
+                    radius: 30,
                     backgroundImage: Image.file(
                       photo,
                       fit: BoxFit.cover,

@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:todo_app/core/utilies/app_colors.dart';
 import 'package:todo_app/featuers/add_task/presentation/view/add_task_screen.dart';
 import 'package:todo_app/featuers/home/presentation/view/widgets/body_home_screen.dart';
+import 'package:todo_app/featuers/home/presentation/view/widgets/home_screen_drawer.dart';
 
 class HomeScreen extends StatelessWidget {
    const HomeScreen({super.key, required this.name, required this.photo});
@@ -32,6 +33,10 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         drawer: Drawer(
+          child: HomeScreenDrawer(
+            photo: photo,
+            name: name,
+          ),
         ),
         body: BodyHomeScreen(
           name: name,

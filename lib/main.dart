@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/core/utilies/app_fonts.dart';
 import 'package:todo_app/featuers/onboarding/presentation/view/onboarding_screen.dart';
 
 main(){
@@ -12,6 +13,9 @@ class TodoApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: OnboardingScreen(),
+      theme: ThemeData(
+        fontFamily: AppFonts.lexendDeca
+      ),
     );
   }
 }

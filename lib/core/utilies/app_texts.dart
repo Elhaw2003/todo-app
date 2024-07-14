@@ -23,4 +23,6 @@ class AppTexts {
   static const String setATimeForTheTask = "Set a Time For The Task";
   static const String noAddedNotes = "No Added Notes";
   static const String fillYourDetails = "Fill Your Details";
+  static const String archivedTasks = "Archived Tasks";
+  static const String doneTasks = "Done Tasks";
 }
