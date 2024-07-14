@@ -29,6 +29,10 @@ class CustomTextFormField extends StatelessWidget {
               ),
             ),
             TextFormField(
+              //to hide keyboard
+              onTapOutside: (p){
+                FocusManager.instance.primaryFocus?.unfocus();
+              },
               controller: controller,
               decoration: InputDecoration(
                 hintText:hintText,

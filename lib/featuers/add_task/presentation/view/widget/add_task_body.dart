@@ -187,6 +187,7 @@ class _AddTaskBodyState extends State<AddTaskBody> {
                           endDate: convertDate(endDate!)
                       )
                   );
+                  Navigator.pop(context);
                 }
                 else{
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(AppTexts.fillYourDetails)));

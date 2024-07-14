@@ -7,10 +7,16 @@ import 'package:todo_app/featuers/add_task/presentation/view/add_task_screen.dar
 import 'package:todo_app/featuers/home/presentation/view/widgets/body_home_screen.dart';
 import 'package:todo_app/featuers/home/presentation/view/widgets/home_screen_drawer.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
    const HomeScreen({super.key, required this.name, required this.photo});
    final String name;
    final File photo;
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -25,7 +31,11 @@ class HomeScreen extends StatelessWidget {
           onPressed: (){
             Navigator.push(context, MaterialPageRoute(builder: (c){
               return AddTaskScreen();
-            }));
+            })).then((value) {
+              setState(() {
+
+              });
+            });
           },
           child: Icon(
             Icons.add,
@@ -34,13 +44,13 @@ class HomeScreen extends StatelessWidget {
         ),
         drawer: Drawer(
           child: HomeScreenDrawer(
-            photo: photo,
-            name: name,
+            photo: widget.photo,
+            name: widget.name,
           ),
         ),
         body: BodyHomeScreen(
-          name: name,
-          photo: photo,
+          name: widget.name,
+          photo: widget.photo,
         )
       ),
     );

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/core/utilies/app_colors.dart';
 import 'package:todo_app/core/utilies/app_images.dart';
 import 'package:todo_app/core/utilies/app_texts.dart';
+import 'package:todo_app/featuers/done/presentation/view/done_screen.dart';
 import 'package:todo_app/featuers/home/presentation/view/widgets/drawer_container.dart';
 
 class HomeScreenDrawer extends StatelessWidget {
@@ -51,6 +52,11 @@ class HomeScreenDrawer extends StatelessWidget {
         ),
         SizedBox(height: 20,),
         DrawerContainer(
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (c){
+              return DoneScreen();
+            }));
+          },
           text: AppTexts.doneTasks,
           icon: Image.asset(AppImages.done),
         )

@@ -21,8 +21,10 @@ class AppTexts {
   static const String enterTheEndDate = "Enter The End Date";
   static const String addTime = "Add Time";
   static const String setATimeForTheTask = "Set a Time For The Task";
-  static const String noAddedNotes = "No Added Notes";
+  static const String noAddedNotes = "No Notes Added";
   static const String fillYourDetails = "Fill Your Details";
   static const String archivedTasks = "Archived Tasks";
   static const String doneTasks = "Done Tasks";
+  static const String taskDetails = "Task Details";
+  static const String noNotesDone = "No Notes Done";
 }
