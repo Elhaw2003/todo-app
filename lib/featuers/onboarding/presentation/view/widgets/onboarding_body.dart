@@ -43,19 +43,17 @@ project-wise conveniently!""",
           ),
         ),
         SizedBox(height: 50,),
-        InkWell(
-          onTap: (){
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (c){
-              return RegesterScreen();
-            }));
-          },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 22),
-            child: CustomButton(
-                title: AppTexts.letsStart,
-                color: AppColors.mainColor,
-                icon: Image.asset(AppImages.arrowleft),
-            ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 22),
+          child: CustomButton(
+              onTap: () {
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (c){
+                  return RegesterScreen();
+                }));
+              },
+              title: AppTexts.letsStart,
+              color: AppColors.mainColor,
+              icon: Image.asset(AppImages.arrowLeft),
           ),
         )
       ],

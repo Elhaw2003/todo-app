@@ -4,8 +4,8 @@ import 'package:todo_app/core/utilies/app_colors.dart';
 import 'package:todo_app/core/utilies/app_images.dart';
 import 'package:todo_app/core/utilies/app_texts.dart';
 
-class CustomAppbar extends StatelessWidget {
-  const CustomAppbar({super.key, required this.name, required this.photo});
+class AppbarHomeScreen extends StatelessWidget {
+  const AppbarHomeScreen({super.key, required this.name, required this.photo});
   final String name;
   final File photo;
   @override

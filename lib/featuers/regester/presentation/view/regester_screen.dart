@@ -36,7 +36,7 @@ class _RegesterScreenState extends State<RegesterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.white.withOpacity(0.97),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25,vertical: 15),
@@ -184,24 +184,22 @@ class _RegesterScreenState extends State<RegesterScreen> {
                 ),
               ),
               SizedBox(height: 50,),
-              InkWell(
-                onTap: (){
-                  if(image == null ){
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(AppTexts.select_Photo_name)));
-                  }
-                  else{
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (c){
-                      return HomeScreen(
-                        name: nameControler.text,
-                        photo:File(image!.path),
-                      );
-                    }));
-                  }
-                },
-                child: CustomButton(
-                    title: AppTexts.getStarted,
-                    color: AppColors.mainColor
-                ),
+              CustomButton(
+                  onTap: (){
+                    if(image == null ){
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(AppTexts.select_Photo_name)));
+                    }
+                    else{
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (c){
+                        return HomeScreen(
+                          name: nameControler.text,
+                          photo:File(image!.path),
+                        );
+                      }));
+                    }
+                  },
+                  title: AppTexts.getStarted,
+                  color: AppColors.mainColor
               )
             ],
           ),
