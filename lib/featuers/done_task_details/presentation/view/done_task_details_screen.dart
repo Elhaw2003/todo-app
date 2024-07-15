@@ -4,6 +4,7 @@ import 'package:todo_app/core/utilies/app_colors.dart';
 import 'package:todo_app/core/utilies/app_texts.dart';
 import 'package:todo_app/core/widgets/custom_appbar.dart';
 import 'package:todo_app/featuers/done_task_details/presentation/view/widgets/container_widget.dart';
+import 'package:todo_app/featuers/done_task_details/presentation/view/widgets/list_tile_widget.dart';
 
 class DoneTaskDetailsScreen extends StatelessWidget {
   const DoneTaskDetailsScreen({super.key, required this.index,});
@@ -35,83 +36,20 @@ class DoneTaskDetailsScreen extends StatelessWidget {
               hintText: notes[index].description,
             ),
             SizedBox(height: 24,),
-            Container(
-              decoration: BoxDecoration(
-                  color: AppColors.white,
-                  borderRadius: BorderRadius.circular(15)
-              ),
-              child: ListTile(
-                leading: Icon(Icons.calendar_month,color: AppColors.mainColor,),
-                title: Text(
-                  AppTexts.startDate,
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.black
-                  ),
-                ),
-                subtitle: Text(
-                  notes[index].startDate,
-                  style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.grey
-                  ),
-                ),
-              ),
-            ),
+            ListTileWidget(
+                title: AppTexts.startDate,
+                dateAndTime: notes[index].startDate,
+                icon: Icon(Icons.calendar_month,color: AppColors.mainColor,)),
             SizedBox(height: 16,),
-            Container(
-              decoration: BoxDecoration(
-                  color: AppColors.white,
-                  borderRadius: BorderRadius.circular(15)
-              ),
-              child: ListTile(
-                leading: Icon(Icons.calendar_month,color: AppColors.mainColor,),
-                title: Text(
-                  AppTexts.endDate,
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.black
-                  ),
-                ),
-                subtitle: Text(
-                  notes[index].endDate,
-                  style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.grey
-                  ),
-                ),
-              ),
-            ),
+            ListTileWidget(
+                title: AppTexts.endDate,
+                dateAndTime: notes[index].endDate,
+                icon: Icon(Icons.calendar_month,color:AppColors.mainColor,)),
             SizedBox(height: 16,),
-            Container(
-              decoration: BoxDecoration(
-                  color: AppColors.white,
-                  borderRadius: BorderRadius.circular(15)
-              ),
-              child: ListTile(
-                leading: Icon(Icons.timer_outlined,color: AppColors.mainColor,),
-                title: Text(
-                  AppTexts.addTime,
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.black
-                  ),
-                ),
-                subtitle: Text(
-                  notes[index].time,
-                  style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.grey
-                  ),
-                ),
-              ),
-            ),
+            ListTileWidget(
+                title: AppTexts.addTime,
+                dateAndTime: notes[index].time,
+                icon: Icon(Icons.timer_outlined,color: AppColors.mainColor,))
           ],
         ),
       ),

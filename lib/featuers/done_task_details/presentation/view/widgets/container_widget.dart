@@ -23,18 +23,19 @@ class ContainerWidget extends StatelessWidget {
                 Text(
                   text,
                   style:const TextStyle(
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w500,
                       fontSize: 14,
                       color: AppColors.black
                   ),
                   ),
               ],
             ),
+            SizedBox(height: 7,),
             Text(
               textAlign: TextAlign.start,
               hintText,
               style: const TextStyle(
-                  fontSize: 13,
+                  fontSize: 14,
                   fontWeight: FontWeight.w300,
                   color: AppColors.grey
               ),

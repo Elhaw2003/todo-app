@@ -24,7 +24,10 @@ class AppTexts {
   static const String noAddedNotes = "No Notes Added";
   static const String fillYourDetails = "Fill Your Details";
   static const String archivedTasks = "Archived Tasks";
+  static const String archive = "Archive";
+  static const String unarchive = "Unarchive";
   static const String doneTasks = "Done Tasks";
   static const String taskDetails = "Task Details";
   static const String noNotesDone = "No Notes Done";
+  static const String delete = "Delete";
 }

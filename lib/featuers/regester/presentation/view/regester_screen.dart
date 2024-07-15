@@ -167,6 +167,9 @@ class _RegesterScreenState extends State<RegesterScreen> {
                       ),
                       SizedBox(height: 7,),
                       TextFormField(
+                        onTapOutside: (p) {
+                          FocusManager.instance.primaryFocus!.unfocus();
+                        },
                         controller: nameControler,
                         decoration: InputDecoration(
                           hintText: AppTexts.enterYourName,
