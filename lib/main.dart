@@ -5,6 +5,7 @@ import 'package:todo_app/featuers/onboarding/presentation/view/onboarding_screen
 main(){
   runApp(TodoApp());
 }
+
 class TodoApp extends StatelessWidget {
   const TodoApp({super.key});
 
