@@ -29,5 +29,11 @@ class AppTexts {
   static const String doneTasks = "Done Tasks";
   static const String taskDetails = "Task Details";
   static const String noNotesDone = "No Notes Done";
+  static const String noNotesArchived = "No Notes Archived";
   static const String delete = "Delete";
+  static const String yes = "Yes";
+  static const String cancel = "Cancel";
+  static const String lightOrDark = "Light Or Dark";
+  static const String areYoySureYouWantToDeleteThisTask = ''' Are you sure you want to delete
+ this task? ''';
 }

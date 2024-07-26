@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/core/utilies/app_colors.dart';
-import 'package:todo_app/core/utilies/app_fonts.dart';
 import 'package:todo_app/core/utilies/app_images.dart';
 import 'package:todo_app/core/utilies/app_texts.dart';
+import 'package:todo_app/core/widgets/controller/theme_controller.dart';
 import 'package:todo_app/core/widgets/custom_button.dart';
 import 'package:todo_app/featuers/regester/presentation/view/regester_screen.dart';
-
 class OnboardingBody extends StatelessWidget {
   const OnboardingBody({super.key});
 
@@ -23,12 +23,7 @@ class OnboardingBody extends StatelessWidget {
         Text("""ToDo List
 Daily Task""",
           textAlign: TextAlign.center,
-          style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 22,
-              fontFamily: AppFonts.lexendDeca,
-              color: AppColors.black
-          ),
+          style: Theme.of(context).textTheme.titleLarge
         ),
         SizedBox(height: 21,),
         Text("""This productive tool is designed to help
@@ -36,13 +31,12 @@ you better manage your task
 project-wise conveniently!""",
           textAlign: TextAlign.center,
           style: TextStyle(
-              fontWeight: FontWeight.w400,
-              fontSize: 14,
-              fontFamily: AppFonts.lexendDeca,
-              color: AppColors.grey
-          ),
+            color: Provider.of<ThemeProvider>(context).switchValue == false? AppColors.grey:AppColors.white,
+            fontWeight: FontWeight.w400,
+            fontSize: 14
+          )
         ),
-        SizedBox(height: 50,),
+        SizedBox(height: 30,),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 22),
           child: CustomButton(
@@ -52,7 +46,9 @@ project-wise conveniently!""",
                 }));
               },
               title: AppTexts.letsStart,
-              color: AppColors.mainColor,
+              colorContainer: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.mainColor:AppColors.blueDark,
+              colorTitle: Provider.of<ThemeProvider>(context).switchValue == false? AppColors.white:AppColors.white,
+              colorBorder: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.mainColor:AppColors.blueDark,
               icon: Image.asset(AppImages.arrowLeft),
           ),
         )

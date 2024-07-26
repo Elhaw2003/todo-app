@@ -9,9 +9,9 @@ class AddTaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white.withOpacity(0.97),
+      // backgroundColor: AppColors.white.withOpacity(0.97),
       appBar: AppBar(
-          backgroundColor: AppColors.white.withOpacity(0.97),
+          // backgroundColor: AppColors.white.withOpacity(0.97),
         flexibleSpace: CustomAppbar(
           onTap: (){
             Navigator.pop(context);

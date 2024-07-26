@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/core/data/lists/task_list.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/core/utilies/app_colors.dart';
 import 'package:todo_app/core/utilies/app_images.dart';
-import 'package:todo_app/featuers/home/presentation/view/widgets/done_container.dart';
+import 'package:todo_app/core/utilies/app_texts.dart';
+import 'package:todo_app/core/widgets/controller/theme_controller.dart';
+import 'package:todo_app/core/widgets/custom_small_button.dart';
+import 'package:todo_app/featuers/home/presentation/controller/home_provider.dart';
 import 'package:todo_app/featuers/home/presentation/view/widgets/task_details.dart';
-
 class ListTileHomeScreen extends StatefulWidget {
   const ListTileHomeScreen({super.key, required this.index});
   final int index;
@@ -20,18 +22,28 @@ class _ListTileHomeScreenState extends State<ListTileHomeScreen> {
       onTap: (){
         Navigator.push(context, MaterialPageRoute(builder: (c){
           return TaskDetails(
-            noteModel: notes[widget.index],
+            noteModel: Provider.of<HomeProvider>(context).notes[widget.index],
           );
         }));
       },
       child: Container(
         decoration: BoxDecoration(
-            color: AppColors.white,
+            color: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.white:AppColors.listTileDark,
             borderRadius: BorderRadius.circular(15)
         ),
         child: ListTile(
-          title: Text(notes[widget.index].title),
-          subtitle: Text(notes[widget.index].time),
+          title: Text(
+              Provider.of<HomeProvider>(context).notes[widget.index].title,
+            style: Theme.of(context).textTheme.titleMedium
+          ),
+          subtitle: Text(
+              Provider.of<HomeProvider>(context).notes[widget.index].time,
+            style: TextStyle(
+              color: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.mainColor:AppColors.white,
+                fontWeight: FontWeight.w400,
+                fontSize: 12
+            )
+          ),
           leading: Container(
               width: 35,
               height: 35,
@@ -45,15 +57,25 @@ class _ListTileHomeScreenState extends State<ListTileHomeScreen> {
                 height: 23,
               )
           ),
-          trailing: InkWell(
+          trailing: Provider.of<HomeProvider>(context).notes[widget.index].doneOrNot==true ?
+          CustomSmallButton(
+                  onTap: (){
+                    Provider.of<HomeProvider>(context).notes[widget.index].doneOrNot = !Provider.of<HomeProvider>(context).notes[widget.index].doneOrNot;
+                  },
+                  colorBorder: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.mainColor:AppColors.mainColor,
+                  colorContainer: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.mainColor:AppColors.mainColor,
+                  colorTitle: Provider.of<ThemeProvider>(context).switchValue == false? AppColors.white:AppColors.dark,
+                  title: AppTexts.done,
+              )
+              :
+          CustomSmallButton(
             onTap: (){
-              notes[widget.index].doneOrNot = !notes[widget.index].doneOrNot;
-              setState(() {});
+              Provider.of<HomeProvider>(context,listen: false).notes[widget.index].doneOrNot = !Provider.of<HomeProvider>(context,listen: false).notes[widget.index].doneOrNot;
             },
-            child:notes[widget.index].doneOrNot==true ?
-                DoneContainer(colorContainer: AppColors.mainColor, colorText: AppColors.white)
-                :
-            DoneContainer(colorContainer: AppColors.white, colorText: AppColors.mainColor,)
+            colorBorder: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.mainColor:AppColors.mainColor,
+            colorContainer: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.white:AppColors.listTileDark,
+            colorTitle: Provider.of<ThemeProvider>(context).switchValue == false? AppColors.mainColor:AppColors.white,
+            title: AppTexts.done,
           ),
         ),
       ),

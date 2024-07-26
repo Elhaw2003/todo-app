@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/core/utilies/app_colors.dart';
+import 'package:todo_app/core/widgets/controller/theme_controller.dart';
+
 class DrawerContainer extends StatelessWidget {
   const DrawerContainer({super.key, required this.text,  required this.icon, this.onTap});
   final String text;
@@ -17,7 +20,7 @@ class DrawerContainer extends StatelessWidget {
                   bottomRight: Radius.circular(12),
                   topRight: Radius.circular(12)
               ),
-              color: AppColors.mainColor.withOpacity(0.1)
+              color: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.mainColor.withOpacity(0.1):AppColors.listTileDark,
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 22,vertical: 12),
@@ -30,9 +33,9 @@ class DrawerContainer extends StatelessWidget {
                 Text(
                   text,
                   style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.mainColor
+                      color: Provider.of<ThemeProvider>(context).switchValue == false? AppColors.mainColor:AppColors.white,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16
                   ),
                 )
               ],

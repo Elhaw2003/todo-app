@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/core/utilies/app_colors.dart';
+import 'package:todo_app/core/widgets/controller/theme_controller.dart';
 class ListTileWidget extends StatelessWidget {
   const ListTileWidget({super.key, required this.title, required this.dateAndTime, required this.icon});
   final String title;
@@ -9,26 +11,18 @@ class ListTileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: AppColors.white,
+          color: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.white:AppColors.listTileDark,
           borderRadius: BorderRadius.circular(15)
       ),
       child: ListTile(
         leading: icon,
         title: Text(
           title,
-          style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-              color: AppColors.black
-          ),
+          style: Theme.of(context).textTheme.titleMedium
         ),
         subtitle: Text(
           dateAndTime,
-          style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              color: AppColors.grey
-          ),
+          style: Theme.of(context).textTheme.titleSmall
         ),
       ),
     );

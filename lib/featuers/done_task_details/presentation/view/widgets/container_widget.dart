@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/core/utilies/app_colors.dart';
-
+import 'package:todo_app/core/widgets/controller/theme_controller.dart';
 class ContainerWidget extends StatelessWidget {
   const ContainerWidget({super.key, required this.text, required this.hintText});
   final String text;
@@ -10,7 +11,7 @@ class ContainerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.white:AppColors.listTileDark,
         borderRadius: BorderRadius.circular(15),
       ),
       child: Padding(
@@ -22,11 +23,7 @@ class ContainerWidget extends StatelessWidget {
               children: [
                 Text(
                   text,
-                  style:const TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 14,
-                      color: AppColors.black
-                  ),
+                  style:Theme.of(context).textTheme.titleMedium
                   ),
               ],
             ),
@@ -34,11 +31,7 @@ class ContainerWidget extends StatelessWidget {
             Text(
               textAlign: TextAlign.start,
               hintText,
-              style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w300,
-                  color: AppColors.grey
-              ),
+              style: Theme.of(context).textTheme.titleSmall
             )
           ],
         ),

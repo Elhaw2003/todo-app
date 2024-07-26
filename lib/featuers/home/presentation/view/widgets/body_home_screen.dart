@@ -1,11 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:todo_app/core/data/lists/task_list.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/core/utilies/app_colors.dart';
 import 'package:todo_app/core/utilies/app_texts.dart';
+import 'package:todo_app/core/widgets/controller/theme_controller.dart';
+import 'package:todo_app/featuers/home/presentation/controller/home_provider.dart';
 import 'package:todo_app/featuers/home/presentation/view/widgets/appbar_home_screen.dart';
 import 'package:todo_app/featuers/home/presentation/view/widgets/list_tile_home_screen.dart';
-
 class BodyHomeScreen extends StatelessWidget {
   const BodyHomeScreen({super.key, required this.name, required this.photo});
   final String name;
@@ -21,14 +22,23 @@ class BodyHomeScreen extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child:
-            notes.isEmpty?
-            Center(child: Text(AppTexts.noAddedNotes))  :
+            Provider.of<HomeProvider>(context).notes.isEmpty?
+            Center(
+                child: Text(
+                    AppTexts.noAddedNotes,
+                  style: TextStyle(
+                    color: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.black:AppColors.white,
+                    fontSize: 25,
+                    fontWeight: FontWeight.w600
+                  ),
+                )
+            )  :
 
             ListView.separated(
               separatorBuilder: (context, index) {
                 return SizedBox(height: 18,);
               },
-              itemCount: notes.length,
+              itemCount: Provider.of<HomeProvider>(context).notes.length,
               itemBuilder:  (context, index) {
                 return Dismissible(
                   direction: DismissDirection.startToEnd,

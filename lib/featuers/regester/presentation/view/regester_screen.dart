@@ -3,13 +3,15 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:todo_app/core/utilies/app_colors.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_app/core/utilies/app_colors.dart';
 import 'package:todo_app/core/utilies/app_images.dart';
 import 'package:todo_app/core/utilies/app_texts.dart';
+import 'package:todo_app/core/widgets/controller/theme_controller.dart';
 import 'package:todo_app/core/widgets/custom_button.dart';
+import 'package:todo_app/featuers/home/presentation/controller/home_provider.dart';
 import 'package:todo_app/featuers/home/presentation/view/home_screen.dart';
-
 class RegesterScreen extends StatefulWidget {
    RegesterScreen({super.key});
 
@@ -18,21 +20,20 @@ class RegesterScreen extends StatefulWidget {
 }
 
 class _RegesterScreenState extends State<RegesterScreen> {
-  final ImagePicker picker = ImagePicker();
-    XFile? image;
+  TextEditingController nameControler = TextEditingController();
 
-  getPhoto (ImageSource imageSource) async{
+  ImagePicker picker = ImagePicker();
+  XFile? image;
+
+  getPhoto (ImageSource imageSource,) async{
     image = await picker.pickImage(source: imageSource);
     if(image!=null){
       Navigator.pop(context);
+      setState(() {
+
+      });
     }
-    setState(() {
-
-    });
   }
-
-  TextEditingController nameControler = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,9 +59,7 @@ class _RegesterScreenState extends State<RegesterScreen> {
                           Expanded(
                             child: GestureDetector(
                               onTap: (){
-                                return getPhoto(
-                                    ImageSource.camera
-                                );
+                                return getPhoto(ImageSource.camera);
                               },
                               child: Container(
                                 child: Column(
@@ -88,9 +87,7 @@ class _RegesterScreenState extends State<RegesterScreen> {
                           Expanded(
                             child: GestureDetector(
                               onTap : (){
-                                return getPhoto(
-                                  ImageSource.gallery
-                                );
+                                return getPhoto(ImageSource.gallery);
                               },
                               child: Container(
                                 child: Column(
@@ -124,12 +121,12 @@ class _RegesterScreenState extends State<RegesterScreen> {
                   width: 120,
                   height: 120,
                   decoration: BoxDecoration(
-                    border: Border.all(color: AppColors.mainColor),
+                    border: Border.all(color: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.mainColor:AppColors.white,),
                     borderRadius: BorderRadius.circular(20)
                   ),
                   child: image == null ? Icon(
                   Icons.add_a_photo,
-                  color: AppColors.mainColor,
+                  color: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.mainColor:AppColors.white,
                   size: 40,
                 ): ClipRRect(
                     borderRadius: BorderRadius.circular(20),
@@ -139,18 +136,19 @@ class _RegesterScreenState extends State<RegesterScreen> {
               ),
               SizedBox(height: 5,),
               Text(
-                  image == null ? AppTexts.addPhoto : AppTexts.updatePhoto,
+                image == null ? AppTexts.addPhoto : AppTexts.updatePhoto,
                 style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.grey
+                    color: Provider.of<ThemeProvider>(context).switchValue == false? AppColors.grey:AppColors.white,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14
                 ),
               ),
               SizedBox(height: 30,),
               Container(
                 decoration: BoxDecoration(
+                  color: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.white:AppColors.listTileDark,
                   borderRadius: BorderRadius.circular(15),
-                  border: Border.all(color: AppColors.mainColor)
+                  border: Border.all(color: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.mainColor:AppColors.blueDark,)
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 7),
@@ -160,9 +158,9 @@ class _RegesterScreenState extends State<RegesterScreen> {
                       Text(
                           AppTexts.yourName,
                         style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.grey
+                            color: Provider.of<ThemeProvider>(context).switchValue == false? AppColors.grey:AppColors.white,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14
                         ),
                       ),
                       SizedBox(height: 7,),
@@ -173,11 +171,7 @@ class _RegesterScreenState extends State<RegesterScreen> {
                         controller: nameControler,
                         decoration: InputDecoration(
                           hintText: AppTexts.enterYourName,
-                          hintStyle: TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w300,
-                              color: AppColors.grey
-                          ),
+                            hintStyle: Theme.of(context).textTheme.titleSmall,
                           enabledBorder: InputBorder.none,
                           focusedBorder: InputBorder.none
                         ),
@@ -202,7 +196,9 @@ class _RegesterScreenState extends State<RegesterScreen> {
                     }
                   },
                   title: AppTexts.getStarted,
-                  color: AppColors.mainColor
+                  colorContainer: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.mainColor:AppColors.blueDark,
+                  colorTitle: Provider.of<ThemeProvider>(context).switchValue == false? AppColors.white:AppColors.white,
+                  colorBorder: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.mainColor:AppColors.blueDark,
               )
             ],
           ),

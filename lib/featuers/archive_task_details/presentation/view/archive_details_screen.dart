@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/core/data/models/note_model.dart';
 import 'package:todo_app/core/utilies/app_colors.dart';
@@ -10,17 +8,16 @@ import 'package:todo_app/core/widgets/custom_appbar.dart';
 import 'package:todo_app/core/widgets/custom_button.dart';
 import 'package:todo_app/featuers/done_task_details/presentation/view/widgets/container_widget.dart';
 import 'package:todo_app/featuers/done_task_details/presentation/view/widgets/list_tile_widget.dart';
-import 'package:todo_app/featuers/home/presentation/controller/home_provider.dart';
-import 'package:todo_app/featuers/home/presentation/view/widgets/custom_show_dialog.dart';
-class TaskDetails extends StatefulWidget {
-  const TaskDetails({super.key,  required this.noteModel});
+
+class ArchiveDetailsScreen extends StatefulWidget {
+  const ArchiveDetailsScreen({super.key, required this.noteModel});
   final NoteModel noteModel;
 
   @override
-  State<TaskDetails> createState() => _TaskDetailsState();
+  State<ArchiveDetailsScreen> createState() => _ArchiveDetailsScreenState();
 }
 
-class _TaskDetailsState extends State<TaskDetails> {
+class _ArchiveDetailsScreenState extends State<ArchiveDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,31 +47,22 @@ class _TaskDetailsState extends State<TaskDetails> {
             SizedBox(height: 30,),
             CustomButton(
               onTap: (){
-                Provider.of<HomeProvider>(context,listen: false).updateArchive(Provider.of<HomeProvider>(context,listen: false).notes.indexOf(widget.noteModel));
+                widget.noteModel.archiveOrNot=!widget.noteModel.archiveOrNot;
+                setState(() {});
               },
-              title: Provider.of<HomeProvider>(context).notes[Provider.of<HomeProvider>(context).notes.indexOf(widget.noteModel)].archiveOrNot  ? AppTexts.unarchive:AppTexts.archive,
+              title: widget.noteModel.archiveOrNot? AppTexts.unarchive:AppTexts.archive,
               colorContainer: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.mainColor:AppColors.blueDark,
-              colorTitle: AppColors.white,
-              colorBorder:Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.mainColor:AppColors.blueDark,
+              colorTitle: Provider.of<ThemeProvider>(context).switchValue == false? AppColors.white:AppColors.white,
+              colorBorder: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.mainColor:AppColors.blueDark,
               icon: Icon(Icons.archive_outlined,color: AppColors.white,),
             ),
             SizedBox(height: 16,),
             CustomButton(
-                onTap: (){
-                  setState(() {
-                    showDialog(
-                      context: context,
-                      builder: (c) {
-                        return CustomShowDialog(noteModel: widget.noteModel);
-                      },
-                    );
-                  });
-                },
-                title: AppTexts.delete,
-                colorContainer: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.red:AppColors.red,
-                colorBorder: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.red:AppColors.red,
-                colorTitle: Provider.of<ThemeProvider>(context).switchValue == false? AppColors.white:AppColors.white,
-                icon: Icon(Icons.delete,color: AppColors.white,),
+              title: AppTexts.delete,
+              colorContainer: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.red:AppColors.red,
+              colorBorder: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.red:AppColors.red,
+              colorTitle:Provider.of<ThemeProvider>(context).switchValue == false? AppColors.white:AppColors.white,
+              icon: Icon(Icons.delete,color: AppColors.white,),
             )
           ],
         ),

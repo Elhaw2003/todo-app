@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/core/utilies/app_colors.dart';
+import 'package:todo_app/core/widgets/controller/theme_controller.dart';
+
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({super.key, required this.hintText, required this.title,  this.maxLine=1,  this.minLine=1, this.controller});
@@ -13,7 +16,7 @@ class CustomTextFormField extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        color: AppColors.white
+        color: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.white:AppColors.listTileDark,
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18,vertical: 15),
@@ -22,11 +25,7 @@ class CustomTextFormField extends StatelessWidget {
           children: [
             Text(
                 title,
-              style: const TextStyle(
-                fontWeight: FontWeight.w400,
-                fontSize: 14,
-                color: AppColors.black
-              ),
+                style: Theme.of(context).textTheme.titleMedium
             ),
             TextFormField(
               //to hide keyboard
@@ -35,12 +34,8 @@ class CustomTextFormField extends StatelessWidget {
               },
               controller: controller,
               decoration: InputDecoration(
-                hintText:hintText,
-                hintStyle: const TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w300,
-                    color: AppColors.grey
-                ),
+                  hintText:hintText,
+                  hintStyle: Theme.of(context).textTheme.titleSmall,
                   enabledBorder: InputBorder.none,
                   focusedBorder: InputBorder.none
               ),

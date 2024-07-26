@@ -26,6 +26,6 @@ class ArchivedContainer extends StatelessWidget {
           ),
         ),
       ),
-    );;
+    );
   }
 }

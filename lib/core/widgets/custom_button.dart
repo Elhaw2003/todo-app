@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/core/utilies/app_colors.dart';
-import 'package:todo_app/core/utilies/app_fonts.dart';
-
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key, required this.title,this.icon, required this.color, this.onTap});
+  const CustomButton({super.key,  this.onTap, required this.colorContainer, required this.colorTitle, required this.colorBorder, required this.title, this.icon});
+  final Color colorContainer;
+  final Color colorTitle;
+  final Color colorBorder;
   final String title;
   final Widget? icon;
-  final Color color;
   final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
@@ -15,7 +14,8 @@ class CustomButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
-            color: color
+            color: colorContainer,
+            border: Border.all(color: colorBorder)
         ),
         child: Padding(
           padding: const EdgeInsets.all(12),
@@ -28,8 +28,7 @@ class CustomButton extends StatelessWidget {
                   style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 19,
-                      fontFamily: AppFonts.lexendDeca,
-                      color: AppColors.white
+                      color: colorTitle
                   ),
                 ),
               ),

@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_app/core/data/lists/task_list.dart';
-import 'package:todo_app/core/data/models/note_model.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/core/utilies/app_colors.dart';
 import 'package:todo_app/core/utilies/app_images.dart';
 import 'package:todo_app/core/utilies/app_texts.dart';
+import 'package:todo_app/core/widgets/controller/theme_controller.dart';
 import 'package:todo_app/core/widgets/custom_button.dart';
 import 'package:todo_app/core/widgets/custom_text_form_field.dart';
+import 'package:todo_app/featuers/home/presentation/controller/home_provider.dart';
 
 class AddTaskBody extends StatefulWidget {
    AddTaskBody({super.key,});
@@ -19,15 +20,6 @@ class _AddTaskBodyState extends State<AddTaskBody> {
   final TextEditingController controllerName = TextEditingController();
 
   final TextEditingController controllerDescription = TextEditingController();
-
-  DateTime date = DateTime.now();
-
-  DateTime? startDate = DateTime.now();
-
-  DateTime? endDate = DateTime.now();
-
-  TimeOfDay? time ;
-
   String convertDate(DateTime date){
     return date.toString().split(" ")[0];
   }
@@ -57,37 +49,26 @@ class _AddTaskBodyState extends State<AddTaskBody> {
           SizedBox(height: 24,),
           Container(
             decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: BorderRadius.circular(15)
+                color: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.white:AppColors.listTileDark,
+                borderRadius: BorderRadius.circular(15)
             ),
             child: ListTile(
               leading: Icon(Icons.calendar_month,color: AppColors.mainColor,),
               title: Text(
                 AppTexts.startDate,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: AppColors.black
-                ),
+                  style:Theme.of(context).textTheme.titleMedium
               ),
               subtitle: Text(
-                startDate == null ? AppTexts.enterTheStartDate: convertDate(startDate!),
-                style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.grey
-                ),
+                Provider.of<HomeProvider>(context,listen: false).startDate == null ? AppTexts.enterTheStartDate: convertDate(Provider.of<HomeProvider>(context,listen: false).startDate!),
+                  style: Theme.of(context).textTheme.titleSmall
               ),
               trailing: InkWell(
                 onTap: () async{
-                  startDate = await showDatePicker(context: context, firstDate: date, lastDate: date.add(Duration(days: 365)));
-                  setState(() {
-
-                  });
+                  Provider.of<HomeProvider>(context,listen: false).selectStartDate(context);
                 },
                 child: Image.asset(
                   AppImages.arrowDown,
-                  color: AppColors.black,
+                  color: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.black:AppColors.white,
                   width: 24,
                   height: 26.67,
                 ),
@@ -97,37 +78,26 @@ class _AddTaskBodyState extends State<AddTaskBody> {
           SizedBox(height: 16,),
           Container(
             decoration: BoxDecoration(
-                color: AppColors.white,
+                color: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.white:AppColors.listTileDark,
                 borderRadius: BorderRadius.circular(15)
             ),
             child: ListTile(
               leading: Icon(Icons.calendar_month,color: AppColors.mainColor,),
               title: Text(
                 AppTexts.endDate,
-                style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.black
-                ),
+                  style:Theme.of(context).textTheme.titleMedium
               ),
               subtitle: Text(
-                endDate == null ? AppTexts.enterTheEndDate: convertDate(endDate!),
-                style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.grey
-                ),
+                Provider.of<HomeProvider>(context).endDate == null ? AppTexts.enterTheEndDate: convertDate(Provider.of<HomeProvider>(context).endDate!),
+                  style: Theme.of(context).textTheme.titleSmall
               ),
               trailing: InkWell(
                 onTap: () async{
-                  endDate = await showDatePicker(context: context, firstDate: date, lastDate: date.add(Duration(days: 365)));
-                  setState(() {
-                    
-                  });
+                  Provider.of<HomeProvider>(context,listen: false).selectEndDate(context);
                 },
                 child: Image.asset(
                   AppImages.arrowDown,
-                  color: AppColors.black,
+                  color: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.black:AppColors.white,
                   width: 24,
                   height: 26.67,
                 ),
@@ -137,37 +107,26 @@ class _AddTaskBodyState extends State<AddTaskBody> {
           SizedBox(height: 16,),
           Container(
             decoration: BoxDecoration(
-                color: AppColors.white,
+                color: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.white:AppColors.listTileDark,
                 borderRadius: BorderRadius.circular(15)
             ),
             child: ListTile(
               leading: Icon(Icons.timer_outlined,color: AppColors.mainColor,),
               title: Text(
                 AppTexts.addTime,
-                style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.black
-                ),
+                  style:Theme.of(context).textTheme.titleMedium
               ),
               subtitle: Text(
-                time == null ? AppTexts.setATimeForTheTask : time!.format(context),
-                style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.grey
-                ),
+                Provider.of<HomeProvider>(context,listen: false).time == null ? AppTexts.setATimeForTheTask : Provider.of<HomeProvider>(context).time!.format(context),
+                  style: Theme.of(context).textTheme.titleSmall
               ),
               trailing: InkWell(
                 onTap: () async{
-                  time =await showTimePicker(context: context, initialTime: TimeOfDay.now());
-                  setState(() {
-
-                  });
+                  Provider.of<HomeProvider>(context,listen: false).selectTime(context);
                 },
                 child: Image.asset(
                   AppImages.arrowDown,
-                  color: AppColors.black,
+                  color: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.black:AppColors.white,
                   width: 24,
                   height: 26.67,
                 ),
@@ -177,25 +136,17 @@ class _AddTaskBodyState extends State<AddTaskBody> {
           SizedBox(height: 62,),
           CustomButton(
               onTap: (){
-                if(time!=null && startDate !=null && endDate !=null && controllerName.text.isNotEmpty){
-                  notes.add(
-                      NoteModel(
-                          title: controllerName.text,
-                          time: time!.format(context),
-                          description: controllerDescription.text,
-                          startDate: convertDate(startDate!),
-                          endDate: convertDate(endDate!)
-                      )
-                  );
-                  Navigator.pop(context);
-                }
-                else{
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(AppTexts.fillYourDetails)));
-                }
+                Provider.of<HomeProvider>(context,listen: false).addNote(
+                    title: controllerName.text,
+                    description: controllerDescription.text,
+                  context: context
+                );
 
               },
-              title: AppTexts.addTask,
-              color: AppColors.mainColor
+            title: AppTexts.addTask,
+            colorContainer: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.mainColor:AppColors.blueDark,
+            colorTitle: Provider.of<ThemeProvider>(context).switchValue == false? AppColors.white:AppColors.white,
+            colorBorder: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.mainColor:AppColors.blueDark,
           )
         ],
       ),
