@@ -22,7 +22,7 @@ class _ListTileHomeScreenState extends State<ListTileHomeScreen> {
       onTap: (){
         Navigator.push(context, MaterialPageRoute(builder: (c){
           return TaskDetails(
-            noteModel: Provider.of<HomeProvider>(context).notes[widget.index],
+            noteModel: Provider.of<HomeProvider>(context,listen: false).notes[widget.index],
           );
         }));
       },
@@ -34,15 +34,15 @@ class _ListTileHomeScreenState extends State<ListTileHomeScreen> {
         child: ListTile(
           title: Text(
               Provider.of<HomeProvider>(context).notes[widget.index].title,
-            style: Theme.of(context).textTheme.titleMedium
+              style: Theme.of(context).textTheme.titleMedium
           ),
           subtitle: Text(
               Provider.of<HomeProvider>(context).notes[widget.index].time,
-            style: TextStyle(
-              color: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.mainColor:AppColors.white,
-                fontWeight: FontWeight.w400,
-                fontSize: 12
-            )
+              style: TextStyle(
+                  color: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.mainColor:AppColors.white,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 12
+              )
           ),
           leading: Container(
               width: 35,
@@ -59,18 +59,20 @@ class _ListTileHomeScreenState extends State<ListTileHomeScreen> {
           ),
           trailing: Provider.of<HomeProvider>(context).notes[widget.index].doneOrNot==true ?
           CustomSmallButton(
-                  onTap: (){
-                    Provider.of<HomeProvider>(context).notes[widget.index].doneOrNot = !Provider.of<HomeProvider>(context).notes[widget.index].doneOrNot;
-                  },
-                  colorBorder: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.mainColor:AppColors.mainColor,
-                  colorContainer: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.mainColor:AppColors.mainColor,
-                  colorTitle: Provider.of<ThemeProvider>(context).switchValue == false? AppColors.white:AppColors.dark,
-                  title: AppTexts.done,
-              )
+            onTap: (){
+              Provider.of<HomeProvider>(context,listen: false).notes[widget.index].doneOrNot = !Provider.of<HomeProvider>(context,listen: false).notes[widget.index].doneOrNot;
+              setState(() {});
+            },
+            colorBorder: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.mainColor:AppColors.mainColor,
+            colorContainer: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.mainColor:AppColors.mainColor,
+            colorTitle: Provider.of<ThemeProvider>(context).switchValue == false? AppColors.white:AppColors.dark,
+            title: AppTexts.done,
+          )
               :
           CustomSmallButton(
             onTap: (){
               Provider.of<HomeProvider>(context,listen: false).notes[widget.index].doneOrNot = !Provider.of<HomeProvider>(context,listen: false).notes[widget.index].doneOrNot;
+              setState(() {});
             },
             colorBorder: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.mainColor:AppColors.mainColor,
             colorContainer: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.white:AppColors.listTileDark,

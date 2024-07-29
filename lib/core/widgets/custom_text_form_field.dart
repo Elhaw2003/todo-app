@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/core/utilies/app_colors.dart';
 import 'package:todo_app/core/widgets/controller/theme_controller.dart';
+import 'package:todo_app/featuers/home/presentation/controller/home_provider.dart';
 
 
 class CustomTextFormField extends StatelessWidget {
@@ -28,7 +29,14 @@ class CustomTextFormField extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleMedium
             ),
             TextFormField(
+              keyboardType: TextInputType.text,
+              style: TextStyle(
+                  color: Provider.of<ThemeProvider>(context).switchValue == false?AppColors.black:AppColors.grey,
+                fontSize: 15,
+                fontWeight: FontWeight.w600
+              ),
               //to hide keyboard
+              cursorColor: Provider.of<ThemeProvider>(context).switchValue == false?AppColors.black:AppColors.white,
               onTapOutside: (p){
                 FocusManager.instance.primaryFocus?.unfocus();
               },

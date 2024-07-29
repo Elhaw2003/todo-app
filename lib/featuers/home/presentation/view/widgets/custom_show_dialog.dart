@@ -30,7 +30,10 @@ class _CustomShowDialogState extends State<CustomShowDialog> {
           children: [
             CustomSmallButton(
                 onTap: (){
-                  Provider.of<HomeProvider>(context,listen: false).removeNote(widget.noteModel,context);
+                  Provider.of<HomeProvider>(context,listen: false).removeNote(
+                    Provider.of<HomeProvider>(context,listen: false).notes.indexOf(widget.noteModel),
+                    context
+                  );
                 },
                 colorContainer: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.red:AppColors.red,
                 colorTitle: Provider.of<ThemeProvider>(context).switchValue == false? AppColors.white:AppColors.white,

@@ -32,8 +32,8 @@ class BodyHomeScreen extends StatelessWidget {
                     fontWeight: FontWeight.w600
                   ),
                 )
-            )  :
-
+            )
+                :
             ListView.separated(
               separatorBuilder: (context, index) {
                 return SizedBox(height: 18,);

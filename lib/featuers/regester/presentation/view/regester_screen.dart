@@ -37,7 +37,7 @@ class _RegesterScreenState extends State<RegesterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white.withOpacity(0.97),
+      // backgroundColor: AppColors.white.withOpacity(0.97),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25,vertical: 15),
@@ -121,7 +121,8 @@ class _RegesterScreenState extends State<RegesterScreen> {
                   width: 120,
                   height: 120,
                   decoration: BoxDecoration(
-                    border: Border.all(color: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.mainColor:AppColors.white,),
+                    color: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.white:AppColors.listTileDark,
+                    border: Border.all(color: Provider.of<ThemeProvider>(context).switchValue == false ? AppColors.mainColor:AppColors.mainColor,),
                     borderRadius: BorderRadius.circular(20)
                   ),
                   child: image == null ? Icon(
@@ -165,6 +166,14 @@ class _RegesterScreenState extends State<RegesterScreen> {
                       ),
                       SizedBox(height: 7,),
                       TextFormField(
+                        keyboardType: TextInputType.text,
+                        style: TextStyle(
+                            color: Provider.of<ThemeProvider>(context).switchValue == false?AppColors.black:AppColors.grey,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600
+                        ),
+                        //to hide keyboard
+                        cursorColor: Provider.of<ThemeProvider>(context).switchValue == false?AppColors.black:AppColors.white,
                         onTapOutside: (p) {
                           FocusManager.instance.primaryFocus!.unfocus();
                         },

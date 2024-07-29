@@ -31,8 +31,8 @@ class HomeProvider extends ChangeNotifier {
    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text(AppTexts.fillYourDetails)));
  }
   }
-  removeNote(NoteModel noteModel,context){
-    notes.remove(noteModel);
+  removeNote(int index,context){
+    notes.removeAt(index);
     Navigator.pop(context);
     Navigator.pop(context);
     notifyListeners();
